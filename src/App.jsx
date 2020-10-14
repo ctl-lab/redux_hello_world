@@ -17,11 +17,22 @@
 // export default connect(mapStateToProps)(App);
 
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import UseTheNewAppState from "./components/UseTheNewAppState";
 
 const App = () => {
   let greeting = useSelector((state) => state.greeting);
   let currentUser = useSelector((state) => state.currentUser);
+
+  const dispatch = useDispatch();
+
+  dispatch({
+    type: "SOMETHING_FROM_APP_COMPONENT",
+    payload: {
+      key1: "some Cool State I Get In App Component",
+      key2: "another Cool State I Get In App Component",
+    },
+  });
 
   return (
     <>
@@ -29,6 +40,9 @@ const App = () => {
       <h2>{currentUser.email}</h2>
       <h2>{currentUser.name}</h2>
       <h2>{currentUser.role}</h2>
+      <br/>
+      <br/>
+      <UseTheNewAppState />
     </>
   );
 };
